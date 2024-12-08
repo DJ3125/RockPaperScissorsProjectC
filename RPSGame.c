@@ -15,20 +15,25 @@ enum Options {
 enum Options selectRandomOption();
 enum Options askUser();
 void formatString(char arr[], int size);
+char* getResultFromEnum(enum Options option);
+void checkWinner(enum Options userPick, enum Options compPick);
 
 int main(){
-  enum Options selected = askUser();
-  switch(selected){
-    case ROCK: printf("Rock"); break;
-    case PAPER: printf("Paper"); break;
-    case SCISSORS: printf("Scissors"); break;
-    default: fprintf(stderr, "something went wrong");
-  }
+  enum Options userSelected = askUser();
+  enum Options compSelected = selectRandomOption();
+  checkWinner(userSelected, compSelected);
+  
+  // switch(selected){
+  //   case ROCK: printf("Rock"); break;
+  //   case PAPER: printf("Paper"); break;
+  //   case SCISSORS: printf("Scissors"); break;
+  //   default: fprintf(stderr, "something went wrong");
+  // }
   return 0;
 }
 
 enum Options selectRandomOption(){
-  enum Options length = END_OF_ENUM;
+  const enum Options length = END_OF_ENUM;
   srand(time(NULL));
   int random = rand();
   return (enum Options) (random) % length;
@@ -55,3 +60,29 @@ void formatString(char arr[], int size){
     arr[i] += -65 + 97;
   }
 }
+
+void checkWinner(enum Options userPick, enum Options compPick){
+  const enum Options length = END_OF_ENUM;
+  if(userPick == NA){fprintf(stderr, "Invalid User Input\n"); return;}
+  
+  // char user[10]; 
+  // strcpy(user, );
+  // char comp[10]; 
+  // strcpy(comp, getResultFromEnum(compPick));
+  
+  printf("User Picked %s\n", getResultFromEnum(userPick));
+  printf("computer picked %s\n", getResultFromEnum(compPick));
+  
+  if((userPick + 1)%length == compPick){printf("User wins!\n"); return;}
+  if((compPick + 1)%length == userPick){printf("Computer wins!\n"); return;}
+  printf("Tie Game!\n");
+}
+
+char* getResultFromEnum(enum Options option){
+  switch(option){
+    case PAPER: return "paper";
+    case ROCK: return "rock";
+    case SCISSORS: return "scissors";
+    default: return NULL;
+  }
+} 
