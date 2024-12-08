@@ -22,13 +22,6 @@ int main(){
   enum Options userSelected = askUser();
   enum Options compSelected = selectRandomOption();
   checkWinner(userSelected, compSelected);
-  
-  // switch(selected){
-  //   case ROCK: printf("Rock"); break;
-  //   case PAPER: printf("Paper"); break;
-  //   case SCISSORS: printf("Scissors"); break;
-  //   default: fprintf(stderr, "something went wrong");
-  // }
   return 0;
 }
 
